@@ -31,7 +31,7 @@ workflows:
     jobs:
       - build-lambdas
       - terraform-orb/init:
-          terraform_version: 0.12.8
+          terraform_version: 0.12.16
           attach-workspace: true
           filters:
             branches:
@@ -39,7 +39,7 @@ workflows:
           infrastructure_dir: terraform
           name: tf-init
       - terraform-orb/plan:
-          terraform_version: 0.12.8
+          terraform_version: 0.12.16
           environment: prod
           attach-workspace: true
           filters:
@@ -58,7 +58,7 @@ workflows:
             branches:
               only: master
       - terraform-orb/apply:
-          terraform_version: 0.12.8
+          terraform_version: 0.12.16
           auto_approve: true
           attach-workspace: true
           environment: prod
