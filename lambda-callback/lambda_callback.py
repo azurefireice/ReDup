@@ -1,3 +1,4 @@
+import os
 from typing import Optional, Any, Dict
 
 import requests
@@ -30,12 +31,13 @@ def lambda_handler(event, context) -> Dict[str, Any]:
 
 def get_user_access_token(code: str) -> str:
     """Obtains user access token from GitHub"""
+    github_url = os.environ["GITHUB_URL"]
     json_body = {
-        "client_id": "fd6f4a7813e39f0ee022",
-        "client_secret": "446091d75336c9546f9f10f626fa51e1dba97665",
+        "client_id": os.environ["CLIENT_ID"],
+        "client_secret": os.environ["CLIENT_SECRET"],
         "code": code
     }
-    resp = requests.post("https://github.com/login/oauth/access_token", json=json_body,
+    resp = requests.post(f"{github_url}/login/oauth/access_token", json=json_body,
                          headers={"Accept": "application/json"})
     resp_json = resp.json()
     print("get user token response json: ", resp_json)
@@ -54,15 +56,17 @@ def create_repo(token: str) -> None:
     """Creates copy of this application's repository for a user with provided authentication token.
     repository creation currently requires custom "preview" header in request, as this is a preview feature from github.
     """
-    template_owner = "azurefireice"
-    template_repo = "ReDup"
-    url = f"https://api.github.com/repos/{template_owner}/{template_repo}/generate"
+    github_api_url = os.environ["GITHUB_API_URL"]
+    template_owner = os.environ["GITHUB_TEMPLATE_REPO_OWNER_NAME"]
+    template_repo_name = os.environ["GITHUB_TEMPLATE_REPO_NAME"]
+    duplicate_repo_name = os.environ["GITHUB_DUPLICATE_REPO_NAME"]
+    duplicate_repo_description = os.environ["GITHUB_DUPLICATE_REPO_DESCRIPTION"]
+    url = f"{github_api_url}/repos/{template_owner}/{template_repo_name}/generate"
     params = {"access_token": token}
     headers = {"Accept": "application/json, application/vnd.github.baptiste-preview+json"}
     body = {
-        "name": "ReDup",
-        "description": "An instance of repository copied by ReDup ©2019 Andrii Gryshchenko."
-                       " For more details please see https://github.com/azurefireice/ReDup."
+        "name": duplicate_repo_name,
+        "description": duplicate_repo_description
     }
     print(f"Making request to {url} with params: token, headers: {headers}, body: {body}")
     resp = requests.post(url=url, json=body, params=params, headers=headers)

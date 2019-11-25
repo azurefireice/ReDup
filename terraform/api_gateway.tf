@@ -163,6 +163,8 @@ output "homepage_url" {
 }
 
 output "auth_redirect_url" {
+  depends_on = [
+    homepage_url]
   value = join("/", [
     aws_api_gateway_deployment.redup_api_deployment.invoke_url,
     aws_api_gateway_resource.redup_root.path_part,

@@ -41,7 +41,8 @@ resource "aws_lambda_function" "callback" {
       GITHUB_API_URL = "https://api.github.com"
       GITHUB_TEMPLATE_REPO_OWNER_NAME = var.GITHUB_TEMPLATE_REPO_OWNER_NAME
       GITHUB_TEMPLATE_REPO_NAME = var.GITHUB_TEMPLATE_REPO_NAME
-      GITHUB_TEMPLATE_REPO_DESCRIPTION = "An instance of repository copied by ReDup ©2019 Andrii Gryshchenko. For more details please see https://github.com/azurefireice/ReDup."
+      GITHUB_DUPLICATE_REPO_NAME = "ReDup"
+      GITHUB_DUPLICATE_REPO_DESCRIPTION = "An instance of repository copied by ReDup ©2019 Andrii Gryshchenko. For more details please see https://github.com/azurefireice/ReDup."
     }
   }
 }
