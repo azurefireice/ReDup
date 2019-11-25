@@ -1,0 +1,72 @@
+version: 2.1
+
+orbs:
+  terraform-orb: bankrate/terraform@1.2.0
+  aws-cli: circleci/aws-cli@0.1.18
+
+jobs:
+  build-lambdas:
+    working_directory: ~/project # directory where steps will run
+
+    steps:
+      - checkout
+      - run:
+          command: |
+            make lint
+      - run:
+          command: |
+            make test
+      -run:
+        command: |
+          make build
+
+          - persist_to_workspace:
+              root: .
+              paths:
+                - ./callback-output.zip
+                - ./welcome-output.zip
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build-lambdas
+      - terraform-orb/init:
+          terraform_version: 0.12.8
+          attach-workspace: true
+          filters:
+            branches:
+              only: master
+          infrastructure_dir: terraform
+          name: tf-init
+      - terraform-orb/plan:
+          terraform_version: 0.12.8
+          environment: prod
+          attach-workspace: true
+          filters:
+            branches:
+              only: master
+          infrastructure_dir: terraform
+          name: tf-plan
+          requires:
+            - tf-init
+            - build-callback
+            - build-welcome
+      - approve_deploy:
+          requires:
+            - tf-plan
+          type: approval
+          filters:
+            branches:
+              only: master
+      - terraform-orb/apply:
+          terraform_version: 0.12.8
+          auto_approve: true
+          attach-workspace: true
+          environment: prod
+          filters:
+            branches:
+              only: master
+          infrastructure_dir: terraform
+          name: tf-apply
+          requires:
+            - approve_deploy
