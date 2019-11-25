@@ -49,8 +49,7 @@ workflows:
           name: tf-plan
           requires:
             - tf-init
-            - build-callback
-            - build-welcome
+            - build-lambdas
       - approve_deploy:
           requires:
             - tf-plan
