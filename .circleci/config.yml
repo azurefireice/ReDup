@@ -13,10 +13,10 @@ jobs:
       - checkout
       - run:
           command: |
-            make lint
+            make test
       - run:
           command: |
-            make test
+            make lint
       - run:
           command: |
             make build
@@ -49,8 +49,7 @@ workflows:
           name: tf-plan
           requires:
             - tf-init
-            - build-callback
-            - build-welcome
+            - build-lambdas
       - approve_deploy:
           requires:
             - tf-plan

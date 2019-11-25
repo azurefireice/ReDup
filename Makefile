@@ -46,10 +46,10 @@ lint:
 test: test-callback test-welcome
 
 test-callback: lambda-callback
-	cd $< &&  pip install -r requirements-test.txt
+	cd $< &&  pip install -r requirements-test.txt --user
 	pytest $<
 
 
 test-welcome: lambda-welcome
-	cd $< &&  pip install -r requirements-test.txt
+	cd $< &&  pip install -r requirements-test.txt --user
 	pytest $<
