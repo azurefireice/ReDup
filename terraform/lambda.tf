@@ -8,6 +8,20 @@ variable "region" {
   default = "us-east-2"
 }
 
+variable "GITHUB_CLIENT_ID" {
+  type = string
+}
+variable "GITHUB_CLIENT_SECRET" {
+  type = string
+}
+variable "GITHUB_TEMPLATE_REPO_OWNER_NAME" {
+  type = string
+}
+variable "GITHUB_TEMPLATE_REPO_NAME" {
+  type = string
+  default = "ReDup"
+}
+
 resource "aws_lambda_function" "callback" {
   filename = local.callback_lambda_filepath
   function_name = "redup-callback-function"
@@ -21,13 +35,13 @@ resource "aws_lambda_function" "callback" {
   role = aws_iam_role.iam_for_redup.arn
   environment {
     variables = {
-      CLIENT_ID = "TODO: REFERENCE ENV VAR"
-      CLIENT_SECRET = "TODO: REFERENCE ENV VAR"
+      CLIENT_ID = var.GITHUB_CLIENT_ID
+      CLIENT_SECRET = var.GITHUB_CLIENT_SECRET
       GITHUB_URL = "https://github.com"
-      GUTHUB_API_URL = "https://api.github.com"
-      GUTHUB_TEMPLATE_REPO_OWNER_NAME = "azurefireice"
-      GUTHUB_TEMPLATE_REPO_NAME = "ReDup"
-      GUTHUB_TEMPLATE_REPO_DESCRIPTION = "An instance of repository copied by ReDup ©2019 Andrii Gryshchenko. For more details please see https://github.com/azurefireice/ReDup."
+      GITHUB_API_URL = "https://api.github.com"
+      GITHUB_TEMPLATE_REPO_OWNER_NAME = var.GITHUB_TEMPLATE_REPO_OWNER_NAME
+      GITHUB_TEMPLATE_REPO_NAME = var.GITHUB_TEMPLATE_REPO_NAME
+      GITHUB_TEMPLATE_REPO_DESCRIPTION = "An instance of repository copied by ReDup ©2019 Andrii Gryshchenko. For more details please see https://github.com/azurefireice/ReDup."
     }
   }
 }
