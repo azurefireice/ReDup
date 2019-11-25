@@ -7,7 +7,8 @@ orbs:
 jobs:
   build-lambdas:
     working_directory: ~/project # directory where steps will run
-
+    docker:
+      - image: circleci/python:3.8.0
     steps:
       - checkout
       - run:
