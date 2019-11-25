@@ -13,10 +13,10 @@ jobs:
       - checkout
       - run:
           command: |
-            make lint
+            make test
       - run:
           command: |
-            make test
+            make lint
       - run:
           command: |
             make build
