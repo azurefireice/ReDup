@@ -22,6 +22,7 @@ At the current state there are lot of improvements that can be done. Here are so
 8. Create hosting for front-end part of application and leverage static content distribution via CDN.
 9. Authorization/Authentication.
 10. Filter dependencies for zip, to reduce lambda size
+11. Staging environment
 
 
 

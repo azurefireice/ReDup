@@ -19,12 +19,11 @@ jobs:
       -run:
         command: |
           make build
-
-          - persist_to_workspace:
-              root: .
-              paths:
-                - ./callback-output.zip
-                - ./welcome-output.zip
+        - persist_to_workspace:
+            root: .
+            paths:
+              - ./callback-output.zip
+              - ./welcome-output.zip
 
 workflows:
   build-test-deploy:
