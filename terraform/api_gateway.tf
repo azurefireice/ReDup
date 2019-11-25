@@ -63,7 +63,7 @@ resource "aws_api_gateway_integration" "redup_root_lambda_integration" {
 resource "aws_api_gateway_resource" "callback_resource" {
   rest_api_id = aws_api_gateway_rest_api.redup_api.id
   parent_id = aws_api_gateway_resource.redup_root.id
-  path_part = "counter_callback"
+  path_part = "callback"
 }
 
 resource "aws_api_gateway_method" "callback_method" {
@@ -155,8 +155,17 @@ resource "aws_api_gateway_deployment" "redup_api_deployment" {
   stage_name = "prod"
 }
 
-output "base_url" {
+output "homepage_url" {
   value = join("/", [
     aws_api_gateway_deployment.redup_api_deployment.invoke_url,
-    aws_api_gateway_resource.redup_root.path_part])
+    aws_api_gateway_resource.redup_root.path_part
+  ])
+}
+
+output "auth_redirect_url" {
+  value = join("/", [
+    aws_api_gateway_deployment.redup_api_deployment.invoke_url,
+    aws_api_gateway_resource.redup_root.path_part,
+    aws_api_gateway_resource.callback_resource.path_part
+  ])
 }
