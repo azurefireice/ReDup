@@ -23,6 +23,8 @@ At the current state there are lot of improvements that can be done. Here are so
 9. Authorization/Authentication.
 10. Filter dependencies for zip, to reduce lambda size
 11. Staging environment
+12. Add terraform syntax linting and test.
+
 
 
 

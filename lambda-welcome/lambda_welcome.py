@@ -15,7 +15,7 @@ def lambda_handler(event, context):
         </p>
         <p>
           We're going to copy this application's repository to your account! Isn't that exciting? <br>
-          For that we will need to access your public repositories from out GitHub application. <br>
+          For that we will need to access your public repositories from our GitHub application. <br>
           <a href="{github_url}/login/oauth/authorize?scope=public_repo&client_id={client_id}">
           Click here</a> to begin!</a>
         </p>

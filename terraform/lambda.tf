@@ -59,7 +59,7 @@ resource "aws_lambda_function" "welcome" {
   role = aws_iam_role.iam_for_redup.arn
   environment {
     variables = {
-      CLIENT_ID = "REFERENCE ENV VAR"
+      CLIENT_ID = var.GITHUB_CLIENT_ID
       GITHUB_URL = "https://github.com"
     }
   }
