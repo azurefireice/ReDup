@@ -24,7 +24,7 @@ libs-callback: lambda-callback/requirements.txt
 callback-output.zip: libs-callback ## Output all code to zip file
 	chmod -R 775  lambda-callback
 	zip -r $@ lambda-callback/*.py
-	cd $< &&  zip -Rm ../$@ *.py
+	cd $< &&  zip -rm ../$@ *
 	# zip all python source code into output.zip
 	# zip libraries installed in the libs dir into output.zip
 	# We `cd` into the directory since zip will always keep the relative
