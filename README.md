@@ -115,7 +115,7 @@ The last command will produce 2 endpoints:
 
 ## Specification
 
-Please see the [Specification document](SpecificationReDup.html)
+Please see the [Specification document](http://htmlpreview.github.com/?https://github.com/azurefireice/ReDup/blob/master/SpecificationReDup.html)
 
 ---
 
