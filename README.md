@@ -51,10 +51,10 @@ The project is a
 2. Setup **private** s3 bucket on AWS. You will need it for storing terraform state.
     - Choose unique **name** for it
 3. Create a [GitHub OAuth app](https://github.com/settings/developers)
-    - You will need Client ID
-    - You will need Client Secret
+    - You will need **Client ID**
+    - You will need **Client Secret**
     - Leave **Homepage URL** and **Authorization callback URL** fields empty.
-     You will update them from [Local Setup](#local-Setup) or [CICD Setup](#cicd-setup) steps
+     You will update them from [Local Setup](#local-Setup) or [CICD Setup](#cicd-setup) steps later on.
 
 ### Local Setup
 
@@ -88,10 +88,10 @@ Deploying from local machine can be done with the following sequence:
     $ terraform apply -auto-approve
 ```
 
-> on the last step you will need to provide the following variables:
->   - AWS_S3_TERRAFORM_BUCKET_NAME - from [Pre-deploy setup](#pre-deploy-setup), step 2
->   - GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
->   - GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
+> on the last step you will need to provide the following **environment variables**:
+>   - TF_VAR_bucket - AWS s3 bucket name, that you have created at [Pre-deploy setup](#pre-deploy-setup), step 2
+>   - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
+>   - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 
 The last command will produce 2 endpoints:
  - *homepage_url* - Homepage from which user can start application workflow
@@ -104,7 +104,7 @@ The last command will produce 2 endpoints:
 
 - To AWS Permissions section of CircleCI project add AWS details from [Pre-deploy setup](#pre-deploy-setup), step 1
 - Setup environment variables of CircleCI project
-    - TF_VAR_AWS_S3_TERRAFORM_BUCKET_NAME - from [Pre-deploy setup](#pre-deploy-setup), step 2
+    - TF_VAR_bucket - from [Pre-deploy setup](#pre-deploy-setup), step 2
     - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
     - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 - Start building project
