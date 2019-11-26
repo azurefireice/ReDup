@@ -15,7 +15,7 @@ The project is a
  - Cloud-native application based on
     - GitHub app
     - AWS lambda
-        - Based on Python 3.8 
+        - Based on Python 3.8
     - API Gateway
  - Is deployed using terraform
  - With enabled CICD workflow provided by [CircleCI](https://circleci.com)
@@ -28,7 +28,7 @@ The project is a
     1. [Pre-deploy setup](#pre-deploy-setup)
     2. [Local Setup](#local-Setup)
     3. [CICD Setup](#cicd-setup)
-2. [Usage](#usage)
+2. [Specification](#specification)
 3. [What could be improved](#What could be improved)
 4. [Team](#team)
 5. [License](#license)
@@ -113,7 +113,9 @@ The last command will produce 2 endpoints:
     - *auth_redirect_url* - redirect URL that should be added to GitHub OAuth app from [Pre-deploy setup](#pre-deploy-setup), step 3
 ---
 
-## Usage
+## Specification
+
+Please see the [Specification document](SpecificationReDup.html)
 
 ---
 
@@ -122,23 +124,34 @@ Due to time limitations, only essential functionality was implemented.
 
 At the current state there are lot of improvements that can be done. Here are some of them:
 
-1. Use "code" GitHub parameter in authentication part.
-2. Use specific GitHub API libraries: [RAuth](https://github.com/litl/rauth), [Authomatic](https://authomatic.github.io/authomatic/index.html).
-3. User OAuth libraries with GitHub provider support: [AuthLib](https://github.com/lepture/authlib), [requests-oauthlib](https://requests-oauthlib.readthedocs.io/en/latest/).
-4. Provide python code as wheel packages.
-5. Implement storing tokens received from GItHub.
-6. It is tempting to get rid of only "requests" lib for callback lambda and use urllib3. This way deployment size can be reduced.
-7. Filter dependencies for zip, to reduce lambda size
-8. Create hosting for front-end part of application and leverage static content distribution via CDN using s3.
-9. Users Authorization/Authentication.
-10. Separate repository creation from callback part and link it with callback function via SNS or SQS.
-11. Staging environment, branching.
-12. Add terraform syntax linting and testing
-13. GitHub app creation with terraform
-14. Terraform initial setup automation(s3 bucket, dynamoDB lock table
-15. Terraform backend bucket name as env variable
-
----
+1. GitHub improvements
+    1. Use "code" GitHub parameter in authentication part.
+    2. Use specific GitHub API libraries: [RAuth](https://github.com/litl/rauth), [Authomatic](https://authomatic.github.io/authomatic/index.html).
+    3. User OAuth libraries with GitHub provider support: [AuthLib](https://github.com/lepture/authlib), [requests-oauthlib](https://requests-oauthlib.readthedocs.io/en/latest/).
+2. Infrastructure improvements
+    1. Staging environment, branching.
+    1. Build
+        1. Provide python code as wheel packages.
+        2. Simplify lambda zip and get rid of the only "requests" lib for callback lambda. Use urllib3 instead. Opposite to with 1.ii, 1.iii.
+        3. Filter trash from pip dependencies in zip, to reduce lambda size.
+    5. Separate repository creation from callback part and link it with callback function via SNS or SQS.
+    7. Terraform
+        1. GitHub app creation with terraform.
+        2. Add terraform syntax linting and testing.
+        3. Terraform initial setup automation(s3 bucket, dynamoDB lock table).
+        4. Terraform backend bucket name as env variable
+3. UI
+    1. Create UI
+    2. Create hosting for front-end part of application and leverage static content distribution via CDN using s3.
+4. Security
+    1. Users Authorization/Authentication.
+    2. Implement storing of tokens received from GItHub.
+5. Monitoring and alerting
+    1. Implement monitoring and alerting
+    3. Error rate
+    4. API usage rate
+    5. GitHub repo creation errors detection
+    6. Create repo from template feature discontinuation on GitHub side
 
 ## Team
 
