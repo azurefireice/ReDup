@@ -5,15 +5,15 @@ provider "aws" {
 
 variable "TERRAFORM_S3_BUCKET" {}
 
-terraform {
-  backend "s3" {}
-}
-
-data "terraform_remote_state" "state" {
+data "terraform_remote_state" "s3_state" {
   backend = "s3"
   config = {
     bucket = var.TERRAFORM_S3_BUCKET
     region = "us-east-2"
     key = "redup/terraform.tfstate"
   }
+}
+
+terraform {
+  backend "s3" {}
 }
