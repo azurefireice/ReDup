@@ -1,4 +1,4 @@
-<img src="logo.png" alt="ReDup" width="512" height="512">
+[![ReDup](logo.png)]()
 
 [![CircleCI](https://circleci.com/gh/azurefireice/ReDup.svg?style=svg&circle-token=8b4ce0d90d061d83094365eb7e8c731d62d4aae7)](https://circleci.com/gh/azurefireice/ReDup)
 
@@ -89,7 +89,7 @@ Deploying from local machine can be done with the following sequence:
 ```
 
 > on the last step you will need to provide the following **environment variables**:
->   - TF_VAR_bucket - AWS s3 bucket name, that you have created at [Pre-deploy setup](#pre-deploy-setup), step 2
+>   - TF_VAR_TERRAFORM_S3_BUCKET - AWS s3 bucket name, that you have created at [Pre-deploy setup](#pre-deploy-setup), step 2
 >   - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
 >   - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 
@@ -104,7 +104,7 @@ The last command will produce 2 endpoints:
 
 - To AWS Permissions section of CircleCI project add AWS details from [Pre-deploy setup](#pre-deploy-setup), step 1
 - Setup environment variables of CircleCI project
-    - TF_VAR_bucket - from [Pre-deploy setup](#pre-deploy-setup), step 2
+    - TF_VAR_TERRAFORM_S3_BUCKET - from [Pre-deploy setup](#pre-deploy-setup), step 2
     - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
     - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 - Start building project
