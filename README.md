@@ -50,6 +50,7 @@ The project is a
     - Setup Access keys (**access key ID** and **secret access key**) on your AWS account
 2. Setup **private** s3 bucket on AWS. You will need it for storing terraform state.
     - Choose unique **name** for it
+    - Add it to [main.tf](terraform/main.tf) as **bucket** value
 3. Create a [GitHub OAuth app](https://github.com/settings/developers)
     - You will need **Client ID**
     - You will need **Client Secret**
@@ -89,7 +90,6 @@ Deploying from local machine can be done with the following sequence:
 ```
 
 > on the last step you will need to provide the following **environment variables**:
->   - TF_VAR_TERRAFORM_S3_BUCKET - AWS s3 bucket name, that you have created at [Pre-deploy setup](#pre-deploy-setup), step 2
 >   - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
 >   - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 
@@ -104,7 +104,6 @@ The last command will produce 2 endpoints:
 
 - To AWS Permissions section of CircleCI project add AWS details from [Pre-deploy setup](#pre-deploy-setup), step 1
 - Setup environment variables of CircleCI project
-    - TF_VAR_TERRAFORM_S3_BUCKET - from [Pre-deploy setup](#pre-deploy-setup), step 2
     - TF_VAR_GITHUB_CLIENT_ID and TF_VAR_GITHUB_CLIENT_SECRET - from [Pre-deploy setup](#pre-deploy-setup), step 1
     - TF_VAR_GITHUB_TEMPLATE_REPO_OWNER_NAME - your GitHub user name
 - Start building project
@@ -136,7 +135,8 @@ At the current state there are lot of improvements that can be done. Here are so
 11. Staging environment, branching.
 12. Add terraform syntax linting and testing
 13. GitHub app creation with terraform
-14. Terraform initial setup automation
+14. Terraform initial setup automation(s3 bucket, dynamoDB lock table
+15. Terraform backend bucket name as env variable
 
 ---
 
